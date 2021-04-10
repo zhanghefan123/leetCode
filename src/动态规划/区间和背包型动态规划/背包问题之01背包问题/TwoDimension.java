@@ -1,7 +1,7 @@
 package 动态规划.区间和背包型动态规划.背包问题之01背包问题;
 //题目
 import java.util.*;
-public class BackPack2 {
+public class TwoDimension {
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
