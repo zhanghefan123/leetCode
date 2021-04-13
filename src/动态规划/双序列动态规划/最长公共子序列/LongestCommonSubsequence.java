@@ -1,4 +1,4 @@
-package 动态规划.最长序列型动态规划.最长公共子序列;
+package 动态规划.双序列动态规划.最长公共子序列;
 
 import java.util.Scanner;
 
