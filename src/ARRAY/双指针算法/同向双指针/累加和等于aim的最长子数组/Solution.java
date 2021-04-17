@@ -13,6 +13,7 @@ public class Solution {
     当当前窗口的和等于aim的时候，左边缩一格
     * */
 
+
     public static int getMaxLength(int[] arr, int k) {
         if (arr == null || arr.length == 0 || k <= 0) {
             return 0;
@@ -26,6 +27,7 @@ public class Solution {
                 len = Math.max(len, R - L + 1);
                 // 等于情况下，左边缩一个
                 sum -= arr[L++];
+                sum += arr[++R];
             } else if (sum < k) {
                 R++;
                 if (R == arr.length) {

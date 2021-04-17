@@ -8,29 +8,19 @@ class ListNode {
 
 class Solution {
     public ListNode reverseList(ListNode head) {
-        if(head == null)
+        // 指向cur之前的结点
+        ListNode pre = null;
+        // 在即将改变cur的指向的时候，存储cur
+        ListNode next = null;
+        // 当前指向的结点
+        ListNode cur = head;
+        while(cur != null)
         {
-            return null;
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
         }
-        ListNode prehead;
-        ListNode pre = head;
-        ListNode cur = head.next;
-        if(cur == null)
-        {
-            return head;
-        }
-        while(cur!=null)
-        {
-            // 先将这个cur结点删除
-            pre.next = cur.next;
-            // 保存之前的头结点
-            prehead = head;
-            // 再将这个结点作为头部
-            head = cur;
-            head.next = prehead;
-            cur = pre.next;
-        }
-        return head;
-
+        return pre;
     }
 }

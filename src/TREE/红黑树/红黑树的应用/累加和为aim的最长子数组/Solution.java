@@ -42,7 +42,7 @@ public class Solution {
         if (arr == null || arr.length == 0) {
             return 0;
         }
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         // 一个数都没有的时候累加和是0，以索引-1结尾的时候为0
         map.put(0, -1); // important
         int len = 0;

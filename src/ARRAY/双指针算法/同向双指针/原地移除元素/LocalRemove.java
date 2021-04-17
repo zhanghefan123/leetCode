@@ -9,7 +9,9 @@ package ARRAY.双指针算法.同向双指针.原地移除元素;
 public class LocalRemove {
     public int removeElement(int[] nums, int val) {
         // 同向双指针算法
+        // i 指针存储的是当前判断的数
         int i = 0;
+        // j 指针指向的以及j指针指向的之前的数一定!=val
         int j = 0;
         while(i<=nums.length-1)
         {

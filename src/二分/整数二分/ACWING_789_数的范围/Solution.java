@@ -27,10 +27,12 @@ public class Solution {
                 int mid = (l+r)/2;
                 if(sorted_array[mid] >= x)
                 {
+                    // r位置可能就是我们的左边界
                     r = mid;
                 }
                 else
                 {
+                    // mid位置不可能是我们的左边界，mid+1才有可能是我们的左边界
                     l = mid + 1;
                 }
 

@@ -21,7 +21,9 @@ class Node {
     }
 }
 public class Solution {
+    // 记录已经进行过克隆的结点
     private HashMap <Node, Node> visited = new HashMap<>();
+
     public Node cloneGraph(Node node) {
         if (node == null) {
             return node;
@@ -34,11 +36,10 @@ public class Solution {
             return visited.get(node);
         }
 
-        // 克隆节点，注意到为了深拷贝我们不会克隆它的邻居的列表
+        // 克隆当前节点，注意到为了深拷贝我们不会克隆它的邻居的列表
         Node cloneNode = new Node(node.val, new ArrayList());
         // 哈希表存储
         visited.put(node, cloneNode);
-
         // 遍历该节点的邻居并更新克隆节点的邻居列表
         for (Node neighbor: node.neighbors) {
             cloneNode.neighbors.add(cloneGraph(neighbor));

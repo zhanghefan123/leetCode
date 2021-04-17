@@ -38,9 +38,11 @@ public class Solution {
         HashMap<Integer, Integer> map = new HashMap<>();
         map.put(0, -1);
         for (int i = 0; i < arr.length; i++) {
-            // 找最晚出现的xor
+            // xor计算的是0~i的异或和
             xor ^= arr[i];
+            // 如果map之中包含这个异或和
             if (map.containsKey(xor)) {
+                // 找到这个异或和最晚出现的位置
                 int pre = map.get(xor);
                 mosts[i] = pre == -1 ? 1 : (mosts[pre] + 1);
             }

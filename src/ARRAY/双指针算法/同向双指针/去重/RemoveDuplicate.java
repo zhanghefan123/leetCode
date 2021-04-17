@@ -11,6 +11,7 @@ public class RemoveDuplicate {
         start = 0;
         end = 1;
         int length = nums.length;
+        // 至少会存在一个不同的元素
         int count = 1;
         while(end < length)
             if(nums[start] == nums[end])

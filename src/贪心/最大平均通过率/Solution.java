@@ -1,88 +1,63 @@
 package 贪心.最大平均通过率;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Solution {
+import java.util.*;
+class Node{
+    public double total_students;
+    public double pass_students;
+    public Node(double pass_students,double total_students)
+    {
+        this.total_students = total_students;
+        this.pass_students = pass_students;
+    }
+}
 
-    public int extraStudents;
+class Solution {
 
-    public double result;
+    public static PriorityQueue<Node> max_heap = new PriorityQueue<>(new Comparator<Node>() {
 
-    public HashMap<Integer,Integer> classes_list_add;
 
-    public ArrayList<Integer> class_list_add_helper;
+        public int compare(Node node1, Node node2)
+        {
+            // 给node1所代表的班级增加学生所能够创造的增量
+            double increase_node1 = ((node1.pass_students + 1) / (node1.total_students + 1)) - (node1.pass_students / node1.total_students);
+            double increase_node2 = ((node2.pass_students + 1) / (node2.total_students + 1)) - (node2.pass_students / node2.total_students);
+            return increase_node2 - increase_node1 < 0 ? -1 : 1;
+        }
 
-    public int[][] classes;
-
-    public boolean[] visited;
+    });
 
     public double maxAverageRatio(int[][] classes, int extraStudents) {
-        // 初始化
-        this.extraStudents = extraStudents;
-        this.classes_list_add = new HashMap<>();
-        this.result = Integer.MIN_VALUE;
-        this.classes = classes;
-        this.extraStudents = extraStudents;
-        this.class_list_add_helper = new ArrayList<>();
-        // 每个班级只能够分配一个聪明的学生
-        this.visited = new boolean[classes.length];
-        // 二维数组之中的每个元素是一维数组
-        // 一维数组的第一项是通过考试的学生数目，第二项是总共的学生的数目
-        for(int i = 0;i<classes.length;i++)
+        // 先进行大根堆的创建
+        for(int[] tmp_class : classes)
         {
-            classes_list_add.put(i,0);
+            double pass_students_of_class = (double)tmp_class[0];
+            double total_students_of_class = (double)tmp_class[1];
+            max_heap.add(new Node(pass_students_of_class,total_students_of_class));
         }
-        dfs(0);
-        return result;
+        // 首先将大根堆堆顶的元素弹出进行相加的操作
+        // 总共存在extraStudents待分配班级
+        for(int i = 0;i < extraStudents; i++)
+        {
+            Node head = max_heap.poll();
+            head.total_students++;
+            head.pass_students++;
+            max_heap.add(head);
+        }
+        // 最后进行平均通过率的统计
+        double final_res = 0;
+        for(Node tmp : max_heap)
+        {
+            final_res += tmp.pass_students / tmp.total_students;
+        }
+        System.out.println(final_res / classes.length);
+        return final_res / classes.length;
+
     }
 
-    // number 代表已经分配了几个学生
-    public void dfs(int number)
+    public static void main(String[] args)
     {
-        if(number == extraStudents)
-        {
-
-            double tmp_res = 0;
-            // 保留最大的平均通过率
-            for(int key : this.classes_list_add.keySet())
-            {
-                int add = this.classes_list_add.get(key);
-                tmp_res += ((double)(this.classes[key][0] + add) / (double)(this.classes[key][1] + add));
-            }
-            tmp_res /= classes.length;
-            result = Math.max(tmp_res,result);
-            return;
-        }
-        for(int i = 0; i < classes.length;i++)
-        {
-
-            if(!this.class_list_add_helper.isEmpty())
-            {
-                if(this.class_list_add_helper.get(this.class_list_add_helper.size()-1) <= i)
-                {
-                    // 如果这个班级没有添加好学生
-                    this.class_list_add_helper.add(i);
-                    this.classes_list_add.put(i,this.classes_list_add.get(i)+1);
-                    dfs(number+1);
-                    this.classes_list_add.put(i,this.classes_list_add.get(i)-1);
-                    this.class_list_add_helper.remove(class_list_add_helper.size()-1);
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            else
-            {
-                // 如果这个班级没有添加好学生
-                this.class_list_add_helper.add(i);
-                this.classes_list_add.put(i,this.classes_list_add.get(i)+1);
-                dfs(number+1);
-                this.classes_list_add.put(i,this.classes_list_add.get(i)-1);
-                this.class_list_add_helper.remove(class_list_add_helper.size()-1);
-            }
-
-        }
+        Solution s = new Solution();
+        s.maxAverageRatio(new int[][] {{2,4},{3,9},{4,5},{2,10}},4);
     }
 }

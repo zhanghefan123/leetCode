@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 public class Solution {
     public int k;
-    // 当我们需要查找第k大元素的时候，我们让小根堆保持拥有k个元素,那么堆顶就是第K大的元素
+    // 当我们需要查找第k大元素的时候，我们让小根堆保持拥有k个元素
     public PriorityQueue<Integer> minHeap;
     public Solution(int k, int[] nums) {
         this.k = k;

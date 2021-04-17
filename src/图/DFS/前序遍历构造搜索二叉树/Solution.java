@@ -42,7 +42,7 @@ public class Solution {
             split = preorderRight + 1;
         }
         root.left = build(preorder, preorderLeft+1,split-1);
-        root.right = build(preorder, split,preorderRight);
+        root.right = build(preorder, split, preorderRight);
         return root;
     }
 }

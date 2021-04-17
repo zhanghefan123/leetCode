@@ -45,7 +45,7 @@ class Solution1 {
     }
 
     public boolean check(TreeNode u, TreeNode v) {
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.offer(u);
         q.offer(v);
         while (!q.isEmpty()) {

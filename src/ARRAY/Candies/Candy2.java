@@ -10,7 +10,7 @@ public class Candy2 {
         for (int i = 0; i < n; ++i) {
             maxCandies = Math.max(maxCandies, candies[i]);
         }
-        List<Boolean> ret = new ArrayList<Boolean>();
+        List<Boolean> ret = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
             ret.add(candies[i] + extraCandies >= maxCandies);
         }

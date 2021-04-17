@@ -35,6 +35,7 @@ public class Solution {
         return result;
     }
 
+    // 将指针进行反向并让最终的head指向末尾就完成了反向。
     private ListNode reverseList(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
